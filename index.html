@@ -6,7 +6,6 @@
 <title>Hey Jessica! 🎉</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
     --blue: #6d9bf5;
     --blue-deep: #4a7de0;
@@ -21,9 +20,7 @@
     --card: #ffffff;
     --shadow: 0 12px 32px rgba(109, 155, 245, 0.18);
   }
-
   html, body { height: 100%; }
-
   body {
     font-family: "Baloo 2", "Quicksand", "Nunito", "Comic Sans MS", "Segoe UI", system-ui, sans-serif;
     background: linear-gradient(160deg, #dbe9ff 0%, var(--cream) 45%, #ece2ff 100%);
@@ -31,8 +28,6 @@
     overflow-x: hidden;
     line-height: 1.5;
   }
-
-  /* floating emoji background */
   .emoji-field {
     position: fixed;
     inset: 0;
@@ -52,7 +47,6 @@
     10%  { opacity: 0.55; }
     100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
   }
-
   .app {
     position: relative;
     z-index: 1;
@@ -64,7 +58,6 @@
     align-items: center;
     justify-content: center;
   }
-
   .screen {
     display: none;
     width: 100%;
@@ -77,12 +70,10 @@
     animation: popIn 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
   .screen.active { display: block; }
-
   @keyframes popIn {
     from { transform: scale(0.9) translateY(14px); opacity: 0; }
     to   { transform: scale(1) translateY(0);    opacity: 1; }
   }
-
   h1 {
     font-size: 2.1rem;
     color: var(--purple-deep);
@@ -99,7 +90,6 @@
     0%, 100% { transform: rotate(-6deg); }
     50%      { transform: rotate(6deg); }
   }
-
   p.sub {
     color: var(--muted);
     font-size: 1rem;
@@ -132,7 +122,6 @@
     animation: blink 0.8s steps(1) infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
-
   .btn {
     font-family: inherit;
     font-size: 1.15rem;
@@ -146,7 +135,6 @@
   }
   .btn:hover { transform: translateY(-3px) scale(1.03); }
   .btn:active { transform: translateY(0) scale(0.97); }
-
   .btn-yes {
     background: linear-gradient(135deg, #4fae6e, #2e9b54);
     color: #fff;
@@ -177,7 +165,6 @@
     font-size: 0.95rem;
   }
   .btn-ghost:hover { background: var(--blue-soft); }
-
   .btn-row { margin-top: 14px; }
   .no-swoop {
     animation: swoop 0.5s ease;
@@ -187,8 +174,6 @@
     55% { transform: translateX(12px) rotate(6deg); }
     100%{ transform: translateX(0) rotate(0); }
   }
-
-  /* Calendar */
   .cal-wrap { margin: 14px 0 4px; }
   .cal-head {
     display: flex;
@@ -240,8 +225,6 @@
     box-shadow: 0 4px 12px rgba(122, 79, 192, 0.45);
   }
   .cal-hint { color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; }
-
-  /* Food menu */
   .food-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -274,8 +257,6 @@
   .food-card .emoji { font-size: 2.2rem; display: block; }
   .food-card .name { font-size: 0.85rem; font-weight: 800; color: var(--ink); }
   .food-card.selected .name { color: var(--purple-deep); }
-
-  /* Confirm */
   .confirm-card {
     background: linear-gradient(135deg, var(--blue-soft), var(--purple-soft));
     border: 2px dashed #c4b4ee;
@@ -289,14 +270,12 @@
     margin: 6px 0;
   }
   .confirm-line small { display: block; color: var(--muted); font-weight: 600; font-size: 0.8rem; }
-
   .status-msg {
     margin-top: 14px;
     font-size: 0.95rem;
     color: var(--purple-deep);
     min-height: 1.5em;
   }
-
   .confetti {
     position: fixed;
     z-index: 5;
@@ -307,8 +286,27 @@
     0%   { transform: translate(0,0) scale(0.5); opacity: 1; }
     100% { transform: translate(var(--dx), var(--dy)) scale(1.1); opacity: 0; }
   }
-
   .footer-note { font-size: 0.8rem; color: var(--muted); margin-top: 20px; }
+
+  /* --- NEW: tap-to-confirm hint + pulsing glow on the final submit button --- */
+  .tap-hint {
+    font-size: 0.92rem;
+    color: var(--purple-deep);
+    font-weight: 700;
+    margin: 4px 0 2px;
+    animation: bounceHint 1.3s ease-in-out infinite;
+  }
+  @keyframes bounceHint {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(5px); }
+  }
+  .pulse {
+    animation: pulseGlow 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 8px 20px rgba(122, 79, 192, 0.4); }
+    50%      { box-shadow: 0 10px 30px rgba(122, 79, 192, 0.8); }
+  }
 
   @media (max-width: 480px) {
     .app { padding: 16px 12px 40px; }
@@ -321,9 +319,7 @@
 </style>
 </head>
 <body>
-
 <div class="emoji-field" id="emojiField"></div>
-
 <div class="app">
   <!-- SCREEN 1: ASK -->
   <div class="screen active" id="screen-ask">
@@ -338,7 +334,6 @@
       <button class="btn btn-no" id="btnNo">NO 😅</button>
     </div>
   </div>
-
   <!-- SCREEN 2: YES SURPRISE -->
   <div class="screen" id="screen-yes">
     <span class="big-emoji">😳</span>
@@ -350,7 +345,6 @@
       <button class="btn btn-primary" id="btnYesContinue">Okay okay, let's plan it! 📅</button>
     </div>
   </div>
-
   <!-- SCREEN 3: NO DRAMA -->
   <div class="screen" id="screen-no">
     <span class="big-emoji">😭</span>
@@ -362,7 +356,6 @@
       <button class="btn btn-ghost" id="btnComeBack">Just kidding, take me back 🙈</button>
     </div>
   </div>
-
   <!-- SCREEN 4: CALENDAR -->
   <div class="screen" id="screen-cal">
     <span class="big-emoji">📅</span>
@@ -380,7 +373,6 @@
       <button class="btn btn-primary" id="btnFood" disabled>Next: what are we eating? 🍽️</button>
     </div>
   </div>
-
   <!-- SCREEN 5: FOOD -->
   <div class="screen" id="screen-food">
     <span class="big-emoji">🤤</span>
@@ -391,7 +383,6 @@
       <button class="btn btn-primary" id="btnConfirm" disabled>Lock it in! 🔒</button>
     </div>
   </div>
-
   <!-- SCREEN 6: CONFIRM + SUBMIT -->
   <div class="screen" id="screen-confirm">
     <span class="big-emoji">🎉</span>
@@ -404,8 +395,9 @@
       <div class="confirm-line">🍽️ <span id="confirmFood"></span></div>
       <p class="sub" style="margin-top:10px;">Committing to this decision. No take-backs. Not even a little. 🙅‍♀️</p>
     </div>
+    <p class="tap-hint">👇 Tap below to send your answer</p>
     <div class="btn-row">
-      <button class="btn btn-primary" id="btnSubmit">Yes, we're going! 🥳</button>
+      <button class="btn btn-primary pulse" id="btnSubmit">Yes, we're going! 🥳</button>
       <br>
       <button class="btn btn-ghost" id="btnChangeMind">Wait, let me change my mind</button>
     </div>
@@ -413,15 +405,13 @@
     <div class="footer-note" id="submitFallback"></div>
   </div>
 </div>
-
 <script>
 /* ============================================================
    🛠️  EDIT THIS:
-   _ENDPOINT -> your real  form URL
+   FORMSPREE_ENDPOINT -> your real Formspree form URL
    ============================================================ */
 const HER_NAME = "Jessica";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mppzybkk";
-
 /* ---------- setup ---------- */
 const FOOD_ITEMS = [
   { id: "chinese",  emoji: "🥡", name: "Chinese"  },
@@ -433,25 +423,20 @@ const FOOD_ITEMS = [
   { id: "tacos",    emoji: "🌮", name: "Tacos"    },
   { id: "icecream", emoji: "🍦", name: "Ice cream"}
 ];
-
 const state = {
-  choice: null,           // "yes" | "no"
-  finalChoice: "yes",     // choice we report to the form
-  hesitationCount: 0,     // how many times she flirted with the NO button
+  choice: null,
+  finalChoice: "yes",
+  hesitationCount: 0,
   selectedDate: null,
   food: null,
-  cal: new Date(new Date().getFullYear(), new Date().getMonth(), 1) // displayed month
+  cal: new Date(new Date().getFullYear(), new Date().getMonth(), 1)
 };
-
 const $ = (sel) => document.querySelector(sel);
-
 function show(sel) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $(sel).classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
-/* ---------- typing effect ---------- */
 let typingTimer = null;
 function typeText(el, text, speed = 26, onDone) {
   clearInterval(typingTimer);
@@ -469,8 +454,6 @@ function typeText(el, text, speed = 26, onDone) {
   typingTimer = setInterval(step, speed);
   step();
 }
-
-/* ---------- floating emoji background ---------- */
 const FLOATERS = ["🍕", "🎉", "✨", "🫶", "🎈", "🍦", "📅", "🌟"];
 function spawnFloaters() {
   const field = $("#emojiField");
@@ -500,22 +483,27 @@ function confetti() {
     setTimeout(() => c.remove(), 2200);
   }
 }
-
-/* ---------- screen 1: the ask ---------- */
+async function sendToFormspree(payload) {
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      body: payload,
+      headers: { Accept: "application/json" }
+    });
+    return res.ok;
+  } catch (e) {
+    return false;
+  }
+}
 const ASK_MESSAGE = "Will you go out with me? 👉👈";
 $("#herName").textContent = HER_NAME;
-
 $("#btnYes").addEventListener("click", onYes);
 $("#btnNo").addEventListener("click", onNo);
-
-/* ---------- screen 2: YES (reaction) ---------- */
 function onYes() {
   state.choice = "yes";
   show("#screen-yes");
   typeText($("#yesTyping"), "Hold on… let me process this real quick.\n\n(Processing…) 🤯\n\n(Still processing…) 😳\n\nAlright. Alright. Now we make it official.");
 }
-
-/* ---------- screen 3: NO (drama) ---------- */
 const NO_REACTIONS = [
   "Okay… I guess I'll go eat alone in the corner now.\n\nDon't worry about me. I'll be fine. Mostly. 🥲\n\n(Actually I am not fine.)",
   "Wow. Straight to the heart.\n\nI now understand how a deflated balloon feels. 🎈💨\n\nMeeting you was the only thing on my calendar…",
@@ -527,13 +515,16 @@ function onNo() {
   const msg = NO_REACTIONS[state.hesitationCount % NO_REACTIONS.length];
   show("#screen-no");
   typeText($("#noTyping"), msg);
-}
 
+  const payload = new FormData();
+  payload.append("name", HER_NAME);
+  payload.append("choice", "NO 😅 (declined the outing)");
+  payload.append("hesitationCount", String(state.hesitationCount));
+  sendToFormspree(payload);
+}
 $("#btnComeBack").addEventListener("click", () => {
   show("#screen-ask");
 });
-
-/* ---------- screen 4: calendar ---------- */
 function isPast(d) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -547,11 +538,9 @@ function renderCalendar() {
   const cal = state.cal;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
   $("#calTitle").textContent = monthLabel(cal);
   const grid = $("#calGrid");
   grid.innerHTML = "";
-
   const dows = ["S", "M", "T", "W", "T", "F", "S"];
   dows.forEach(d => {
     const c = document.createElement("div");
@@ -559,11 +548,9 @@ function renderCalendar() {
     c.textContent = d;
     grid.appendChild(c);
   });
-
   const first = new Date(cal.getFullYear(), cal.getMonth(), 1);
   const daysInMonth = new Date(cal.getFullYear(), cal.getMonth() + 1, 0).getDate();
   const offset = first.getDay();
-
   for (let i = 0; i < offset; i++) {
     const blank = document.createElement("div");
     grid.appendChild(blank);
@@ -574,7 +561,6 @@ function renderCalendar() {
     btn.className = "cal-day";
     btn.textContent = day;
     btn.dataset.day = day;
-
     const isToday = d.getTime() === today.getTime();
     if (isToday) btn.classList.add("today");
     if (isPast(d) || isToday) {
@@ -599,7 +585,6 @@ $("#calNext").addEventListener("click", () => {
   state.cal.setMonth(state.cal.getMonth() + 1);
   renderCalendar();
 });
-
 $("#btnYesContinue").addEventListener("click", () => {
   renderCalendar();
   show("#screen-cal");
@@ -607,8 +592,6 @@ $("#btnYesContinue").addEventListener("click", () => {
 $("#btnFood").addEventListener("click", () => {
   show("#screen-food");
 });
-
-/* ---------- screen 5: food ---------- */
 function renderFood() {
   const grid = $("#foodGrid");
   grid.innerHTML = "";
@@ -641,44 +624,34 @@ $("#btnConfirm").addEventListener("click", () => {
     "Okay so, for the record:\n📅 " + dateStr + "\n🍽️ " + item.name + " " + item.emoji +
     "\n\nThat's a done deal. It's going to be a legendary friendly outing. 🫡");
 });
-
-/* ---------- screen 6: confirm + submit ---------- */
 $("#btnChangeMind").addEventListener("click", () => {
   show("#screen-food");
 });
-
 $("#btnSubmit").addEventListener("click", async () => {
   const btn = $("#btnSubmit");
+  btn.classList.remove("pulse");
   btn.disabled = true;
   btn.textContent = "Sending the good news… ✉️";
   $("#statusMsg").textContent = "Delivering the official confirmation…";
-
   const item = FOOD_ITEMS.find(f => f.id === state.food);
   const dateStr = state.selectedDate.toLocaleDateString("en-US", {
     weekday: "long", year: "numeric", month: "long", day: "numeric"
   });
-
   const payload = new FormData();
   payload.append("name", HER_NAME);
   payload.append("choice", "YES 🔥 (" + HER_NAME + " is in!)");
   payload.append("selectedDate", dateStr);
   payload.append("food", item.name + " " + item.emoji);
   payload.append("hesitationCount", String(state.hesitationCount));
-
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: "POST",
-      body: payload,
-      headers: { Accept: "application/json" }
-    });
-    if (!res.ok) throw new Error("bad status " + res.status);
+  const ok = await sendToFormspree(payload);
+  if (ok) {
     btn.textContent = "We're going!! 🥳";
     $("#statusMsg").textContent = "📬 Sent! The outing is officially on the books — see you there!";
     confetti();
-  } catch (e) {
-    /* graceful fallback: open the pre-filled email instead */
+  } else {
     btn.textContent = "Yes, we're going! 🥳";
     btn.disabled = false;
+    btn.classList.add("pulse");
     $("#statusMsg").textContent = "";
     const body = encodeURIComponent(
       HER_NAME + " said YES! 🔥\n\nDate: " + dateStr + "\nFood: " + item.name + " " + item.emoji +
@@ -690,8 +663,6 @@ $("#btnSubmit").addEventListener("click", async () => {
       "No worries — just send this instead: <br><a href='" + mailto + "'>Tap to send her answer by email ✉️ (opens your mail app)</a>";
   }
 });
-
-/* ---------- go ---------- */
 spawnFloaters();
 renderFood();
 typeText($("#askTyping"), ASK_MESSAGE, 34);
